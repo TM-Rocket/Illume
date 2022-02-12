@@ -1,0 +1,68 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
+public class PlayerMovement : MonoBehaviour {
+
+    [SerializeField] private float _jumpHeight = 1f;
+    private CharacterController _controller;
+    private PlayerInput _playerInput;
+    private InputAction _movementAction;
+    private InputAction _jumpAction;
+    private Vector3 _move;
+    private Vector3 _playerVelocity;
+    private bool _groundedPlayer;
+    private Animator _animator;
+    private int _isRunningHash;
+    private int _isJumpingHash;
+
+    // Start is called before the first frame update
+    void Start() {
+        _animator = GetComponent<Animator>();
+        _controller = GetComponent<CharacterController>();
+        _playerInput = GetComponent<PlayerInput>();
+        _movementAction = _playerInput.actions["Movement"];
+        _jumpAction = _playerInput.actions["Jump"];
+
+        // Animation bool values
+        _isRunningHash = Animator.StringToHash("isRunning");
+        _isJumpingHash = Animator.StringToHash("isJumping");
+    } 
+
+    // Update is called once per frame
+    void Update() {
+
+        // Checks if player is grounded, if so changes Jumping animation value.
+        _groundedPlayer = _controller.isGrounded;
+        if (_groundedPlayer && _playerVelocity.y < 0) {
+            _animator.SetBool(_isJumpingHash, false);
+            _playerVelocity.y = 0f;
+        }
+
+        //Player Movement and animation read from input
+        Vector2 input = _movementAction.ReadValue<Vector2>();
+        _move = new Vector3(input.x, 0, 0);
+        if(_move.x == 0) {
+            _animator.SetBool(_isRunningHash, false);
+        } else {
+            _animator.SetBool(_isRunningHash, true);
+            transform.rotation = Quaternion.LookRotation(_move); // Makes sure Player is facing the correct direction
+        }
+        _move.y = 0f;
+        _move.z = 0f; // Lock axis
+
+        // Player jump input and animation
+        if (_jumpAction.triggered && _groundedPlayer) {
+            _animator.SetBool(_isJumpingHash, true);
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -7.0f * -9.81f); // Jump + gravity
+        }
+
+        _playerVelocity.y += -40f * Time.deltaTime; // Brings player back down to ground
+    }
+
+    // Apply vectors to move Player
+    private void FixedUpdate() {
+        _controller.Move(_move * Time.fixedDeltaTime * 5);
+        _controller.Move(_playerVelocity * Time.fixedDeltaTime);
+    }
+}
