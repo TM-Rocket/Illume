@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour {
     void Update() {
 
         // Checks if player is grounded, if so changes Jumping animation value.
-        _groundedPlayer = _controller.isGrounded;
         if (_groundedPlayer && _playerVelocity.y < 0) {
             _animator.SetBool(_isJumpingHash, false);
             _playerVelocity.y = 0f;
@@ -42,7 +41,8 @@ public class PlayerMovement : MonoBehaviour {
         //Player Movement and animation read from input
         Vector2 input = _movementAction.ReadValue<Vector2>();
         _move = new Vector3(input.x, 0, 0);
-        if(_move.x == 0) {
+        _controller.Move(_move * Time.deltaTime * 5); // Move player using _move vector from player input
+        if (_move.x == 0) {
             _animator.SetBool(_isRunningHash, false);
         } else {
             _animator.SetBool(_isRunningHash, true);
@@ -58,11 +58,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         _playerVelocity.y += -40f * Time.deltaTime; // Brings player back down to ground
-    }
+        _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
 
-    // Apply vectors to move Player
-    private void FixedUpdate() {
-        _controller.Move(_move * Time.fixedDeltaTime * 5);
-        _controller.Move(_playerVelocity * Time.fixedDeltaTime);
+        _groundedPlayer = _controller.isGrounded; // Character controller grounded check
     }
 }
