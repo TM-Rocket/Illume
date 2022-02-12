@@ -48,8 +48,6 @@ public class PlayerMovement : MonoBehaviour {
             _animator.SetBool(_isRunningHash, true);
             transform.rotation = Quaternion.LookRotation(_move); // Makes sure Player is facing the correct direction
         }
-        _move.y = 0f;
-        _move.z = 0f; // Lock axis
 
         // Player jump input and animation
         if (_jumpAction.triggered && _groundedPlayer) {
