@@ -13,7 +13,6 @@ public static class Utility {
 
         for (int i = n; i != 0; i--) {
             int k = seed.Next(n);
-            Debug.Log("k -> " + k + " n -> " + n);
 
             T value = list[k];
             list[k] = list[n];
