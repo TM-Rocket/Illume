@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
         if(transform.position.z != zPosition) {
             _movementOffset.z = (zPosition - transform.position.z) * 0.05f;
         }
-        _controller.Move(_movementOffset);
+        _controller.Move(_movementOffset); // Apply force to pull player back to desired Z-axis value
 
         //Player Movement and animation read from input
         Vector2 input = _movementAction.ReadValue<Vector2>();
