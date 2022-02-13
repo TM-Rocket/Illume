@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerInput _playerInput;
     private InputAction _movementAction;
     private InputAction _jumpAction;
+    private InputAction _earthAction;
     private Vector3 _move;
     private Vector3 _playerVelocity;
     private bool _groundedPlayer;
@@ -16,21 +17,20 @@ public class PlayerMovement : MonoBehaviour {
     private int _isRunningHash;
     private int _isJumpingHash;
 
-    // Start is called before the first frame update
-    void Start() {
+    private void Start() {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
         _movementAction = _playerInput.actions["Movement"];
         _jumpAction = _playerInput.actions["Jump"];
+        _earthAction = _playerInput.actions["EarthAction"];
 
         // Animation bool values
         _isRunningHash = Animator.StringToHash("isRunning");
         _isJumpingHash = Animator.StringToHash("isJumping");
     } 
 
-    // Update is called once per frame
-    void Update() {
+    private void Update() {
 
         // Checks if player is grounded, if so changes Jumping animation value.
         if (_groundedPlayer && _playerVelocity.y < 0) {
