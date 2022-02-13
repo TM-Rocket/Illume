@@ -21,7 +21,6 @@ public class SoundObject : MonoBehaviour {
 
     private void Update() {
         if (SoundPuzzle.IsSolved()) {
-            Debug.Log("Puzzle is solved.");
             _renderer.material.SetColor("_Color", Color.green);
         } else if (SoundPuzzle.IsIncorrect()) {
             _renderer.material.SetColor("_Color", Color.white);
@@ -35,7 +34,6 @@ public class SoundObject : MonoBehaviour {
             SoundPuzzle.PlayerAnswers.Add(this);
 
             if (!SoundPuzzle.IsSolved()) {
-                Debug.Log("Still not solved! Keep trying!");
                 _renderer.material.SetColor("_Color", Color.yellow);
             }
         }
