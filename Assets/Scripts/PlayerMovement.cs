@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour {
 
     [SerializeField] private float _jumpHeight = 1f;
+    [SerializeField] private float zPosition = 0f;
     private CharacterController _controller;
     private PlayerInput _playerInput;
     private InputAction _movementAction;
     private InputAction _jumpAction;
     private Vector3 _move;
     private Vector3 _playerVelocity;
+    private Vector3 _movementOffset;
     private bool _groundedPlayer;
     private Animator _animator;
     private int _isRunningHash;
@@ -37,6 +39,11 @@ public class PlayerMovement : MonoBehaviour {
             _animator.SetBool(_isJumpingHash, false);
             _playerVelocity.y = 0f;
         }
+
+        if(transform.position.z != zPosition) {
+            _movementOffset.z = (zPosition - transform.position.z) * 0.05f;
+        }
+        _controller.Move(_movementOffset);
 
         //Player Movement and animation read from input
         Vector2 input = _movementAction.ReadValue<Vector2>();
