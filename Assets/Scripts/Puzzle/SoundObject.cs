@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SoundObject : MonoBehaviour {
@@ -7,6 +8,8 @@ public class SoundObject : MonoBehaviour {
     public AudioClip SoundClip;
     [HideInInspector] 
     public AudioSource SoundSource;
+
+    private bool _isInCoroutine = false;
 
     private void Awake() => _renderer = gameObject.GetComponent<Renderer>();
 
@@ -23,12 +26,13 @@ public class SoundObject : MonoBehaviour {
         if (SoundPuzzle.IsSolved()) {
             _renderer.material.SetColor("_Color", Color.green);
         } else if (SoundPuzzle.IsIncorrect()) {
-            _renderer.material.SetColor("_Color", Color.white);
+            StartCoroutine("FlashBlockColor");
         } 
     }
 
     private void OnTriggerEnter(Collider other) { 
-        if (!SoundPuzzle.IsSolved()) {
+        // Only play sounds when puzzle isn't solved and 'Red' blocks aren't flashing
+        if (!SoundPuzzle.IsSolved() && !_isInCoroutine) {
             SoundSource.Play(); 
 
             SoundPuzzle.PlayerAnswers.Add(this);
@@ -38,4 +42,14 @@ public class SoundObject : MonoBehaviour {
             }
         }
     } 
+
+    private IEnumerator FlashBlockColor() {
+        _isInCoroutine = true;
+
+        _renderer.material.SetColor("_Color", Color.red);
+        yield return new WaitForSeconds(2);
+        _renderer.material.SetColor("_Color", Color.white);
+
+        _isInCoroutine = false;
+    }
 }

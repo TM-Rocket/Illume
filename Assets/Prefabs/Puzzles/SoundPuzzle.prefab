@@ -277,7 +277,7 @@ MonoBehaviour:
   - {fileID: 7184322276101880659}
   _puzzleSounds:
   - {fileID: 8300000, guid: 8e3d608e80b5bb24ab426ae82ad00233, type: 3}
-  - {fileID: 8300000, guid: a3b63b4b832843f43806829a72e1c337, type: 3}
+  - {fileID: 8300000, guid: 21a64aa8a69e84940b96e936e19f61fe, type: 3}
   - {fileID: 8300000, guid: 92b539cf3308378459842f088ea9ef1c, type: 3}
 --- !u!1 &7184322276008301614
 GameObject:
