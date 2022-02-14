@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private float _pushPower = 2f;
     [SerializeField] private float zPosition = 0f;
+    [SerializeField] private ParticleSystem _waterFlow;
     private CharacterController _controller;
     private PlayerInput _playerInput;
     private InputAction _movementAction;
     private InputAction _jumpAction;
     private InputAction _interactAction;
+    private InputAction _waterAction;
     private Vector3 _move;
     private Vector3 _playerVelocity;
     private Vector3 _movementOffset;
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
         _playerInput = GetComponent<PlayerInput>();
         _movementAction = _playerInput.actions["Movement"];
         _jumpAction = _playerInput.actions["Jump"];
+        _waterAction = _playerInput.actions["WaterAction"];
 
         // Animation bool values
         _isRunningHash = Animator.StringToHash("isRunning");
@@ -65,6 +68,11 @@ public class PlayerMovement : MonoBehaviour {
         _playerVelocity.y += -40f * Time.deltaTime; // Brings player back down to ground
         _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
 
+
+        if (_waterAction.triggered) {
+            _waterFlow.Play();
+        }
+
         _groundedPlayer = GroundedCheck(); // Character controller grounded check
     }
 
@@ -86,6 +94,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         return false;
+
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {

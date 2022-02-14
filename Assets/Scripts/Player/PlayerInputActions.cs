@@ -49,6 +49,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""WaterAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""c26fecbf-ad9a-4614-9590-4e8345b0bb40"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -238,6 +246,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""EarthAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b157ba4-7612-4db6-b681-d07ca2b7a516"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WaterAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cb08c72-c107-4075-9698-fb4a016f1c83"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WaterAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +280,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_EarthAction = m_Player.FindAction("EarthAction", throwIfNotFound: true);
+        m_Player_WaterAction = m_Player.FindAction("WaterAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -303,6 +334,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_EarthAction;
+    private readonly InputAction m_Player_WaterAction;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -311,6 +343,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @EarthAction => m_Wrapper.m_Player_EarthAction;
+        public InputAction @WaterAction => m_Wrapper.m_Player_WaterAction;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -332,6 +365,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @EarthAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEarthAction;
                 @EarthAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEarthAction;
                 @EarthAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEarthAction;
+                @WaterAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWaterAction;
+                @WaterAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWaterAction;
+                @WaterAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWaterAction;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -348,6 +384,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @EarthAction.started += instance.OnEarthAction;
                 @EarthAction.performed += instance.OnEarthAction;
                 @EarthAction.canceled += instance.OnEarthAction;
+                @WaterAction.started += instance.OnWaterAction;
+                @WaterAction.performed += instance.OnWaterAction;
+                @WaterAction.canceled += instance.OnWaterAction;
             }
         }
     }
@@ -358,5 +397,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnEarthAction(InputAction.CallbackContext context);
+        void OnWaterAction(InputAction.CallbackContext context);
     }
 }
