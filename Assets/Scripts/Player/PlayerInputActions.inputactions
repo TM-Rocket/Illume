@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "WaterAction",
+                    "type": "Button",
+                    "id": "c26fecbf-ad9a-4614-9590-4e8345b0bb40",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -223,6 +231,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "EarthAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b157ba4-7612-4db6-b681-d07ca2b7a516",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WaterAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cb08c72-c107-4075-9698-fb4a016f1c83",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WaterAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
