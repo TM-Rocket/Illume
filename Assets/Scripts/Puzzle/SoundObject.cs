@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class SoundObject : MonoBehaviour {
+public class SoundObject : MonoBehaviour, IInteractable
+{
     private Renderer _renderer;
 
     [HideInInspector] 
@@ -30,18 +31,26 @@ public class SoundObject : MonoBehaviour {
         } 
     }
 
-    private void OnTriggerEnter(Collider other) { 
+    public string GetDescription()
+    {
+        return "Press";
+    }
+
+    public void Interact()
+    {
         // Only play sounds when puzzle isn't solved and 'Red' blocks aren't flashing
-        if (!SoundPuzzle.IsSolved() && !_isInCoroutine) {
-            SoundSource.Play(); 
+        if (!SoundPuzzle.IsSolved() && !_isInCoroutine)
+        {
+            SoundSource.Play();
 
             SoundPuzzle.PlayerAnswers.Add(this);
 
-            if (!SoundPuzzle.IsSolved()) {
+            if (!SoundPuzzle.IsSolved())
+            {
                 _renderer.material.SetColor("_Color", Color.yellow);
             }
         }
-    } 
+    }
 
     private IEnumerator FlashBlockColor() {
         _isInCoroutine = true;
