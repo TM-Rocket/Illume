@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private float _pushPower = 2f;
     [SerializeField] private float zPosition = 0f;
+    [SerializeField] private ParticleSystem _waterFlow;
     private CharacterController _controller;
     private PlayerInput _playerInput;
     private InputAction _movementAction;
     private InputAction _jumpAction;
     private InputAction _interactAction;
+    private InputAction _waterAction;
     private Vector3 _move;
     private Vector3 _playerVelocity;
     private Vector3 _movementOffset;
@@ -19,9 +21,6 @@ public class PlayerMovement : MonoBehaviour {
     private Animator _animator;
     private int _isRunningHash;
     private int _isJumpingHash;
-    private float _jumpTimeCounter;
-    private float _jumpTime;
-    private bool _isJumpingBool;
 
     private void Start() {
         _animator = GetComponent<Animator>();
@@ -29,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
         _playerInput = GetComponent<PlayerInput>();
         _movementAction = _playerInput.actions["Movement"];
         _jumpAction = _playerInput.actions["Jump"];
+        _waterAction = _playerInput.actions["WaterAction"];
 
         // Animation bool values
         _isRunningHash = Animator.StringToHash("isRunning");
@@ -62,19 +62,17 @@ public class PlayerMovement : MonoBehaviour {
         // Player jump input and animation
         if (_jumpAction.triggered && _groundedPlayer) {
             _animator.SetBool(_isJumpingHash, true);
-            if (jumpTimeCounter > 0) {
-                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -7.0f * -9.81f); // Jump + gravity
-                jumpTimeCounter -= Time.deltaTime;
-            }
             _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -7.0f * -9.81f); // Jump + gravity
         }
 
         _playerVelocity.y += -40f * Time.deltaTime; // Brings player back down to ground
         _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
 
+        if (_waterAction.triggered) {
+            _waterFlow.Play();
+        }
+
         _groundedPlayer = _controller.isGrounded; // Character controller grounded check
-
-
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
