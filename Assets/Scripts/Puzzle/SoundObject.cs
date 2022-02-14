@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class SoundObject : MonoBehaviour {
+public class SoundObject : MonoBehaviour, IInteractable
+{
     private Renderer _renderer;
 
     [HideInInspector] 
@@ -22,20 +23,29 @@ public class SoundObject : MonoBehaviour {
     private void Update() {
         if (SoundPuzzle.IsSolved()) {
             _renderer.material.SetColor("_Color", Color.green);
+            gameObject.tag = "Untagged";
         } else if (SoundPuzzle.IsIncorrect()) {
             _renderer.material.SetColor("_Color", Color.white);
         } 
     }
 
-    private void OnTriggerEnter(Collider other) { 
-        if (!SoundPuzzle.IsSolved()) {
-            SoundSource.Play(); 
+    public string GetDescription()
+    {
+        return "Play";
+    }
+
+    public void Interact()
+    {
+        if (!SoundPuzzle.IsSolved())
+        {
+            SoundSource.Play();
 
             SoundPuzzle.PlayerAnswers.Add(this);
 
-            if (!SoundPuzzle.IsSolved()) {
+            if (!SoundPuzzle.IsSolved())
+            {
                 _renderer.material.SetColor("_Color", Color.yellow);
             }
         }
-    } 
+    }
 }
