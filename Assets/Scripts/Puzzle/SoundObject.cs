@@ -30,26 +30,22 @@ public class SoundObject : MonoBehaviour, IInteractable {
         } 
     }
 
-    public string GetDescription()
-    {
-        return "Press";
-    }
-
-    public void Interact()
-    {
+    public void Interact() {
         // Only play sounds when puzzle isn't solved and 'Red' blocks aren't flashing
-        if (!SoundPuzzle.IsSolved() && !_isInCoroutine)
-        {
+        if (!SoundPuzzle.IsSolved() && !_isInCoroutine) {
             SoundSource.Play();
 
             SoundPuzzle.PlayerAnswers.Add(this);
 
-            if (!SoundPuzzle.IsSolved())
-            {
+            if (!SoundPuzzle.IsSolved()) {
                 _renderer.material.SetColor("_Color", Color.yellow);
             }
         }
     }
+
+    public string GetDescription() => "Press";
+
+    public string GetKeyToPress() => "E";
 
     private IEnumerator FlashBlockColor() {
         _isInCoroutine = true;

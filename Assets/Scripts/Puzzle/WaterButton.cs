@@ -6,8 +6,6 @@ public class WaterButton : MonoBehaviour, IInteractable {
 
     private void Awake() => _renderer = GetComponent<Renderer>();
 
-    public string GetDescription() => "Press";
-
     public void Interact() { 
         if (!WaterPuzzle.IsSolved() && !_isPressed) {
             WaterPuzzle.PressedButtons.Add(this);
@@ -16,4 +14,8 @@ public class WaterButton : MonoBehaviour, IInteractable {
             _isPressed = true;
         }
     } 
+
+    public string GetDescription() => "Press";
+
+    public string GetKeyToPress() => "E";
 }

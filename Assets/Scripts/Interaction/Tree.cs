@@ -2,27 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : MonoBehaviour, IInteractable
-{
+public class Tree : MonoBehaviour, IInteractable {
     private Material _mat;
 
-    private void Start()
-    {
-        _mat = GetComponent<MeshRenderer>().material;
-    }
+    private void Start() => _mat = GetComponent<MeshRenderer>().material;
 
-    public string GetDescription()
-    {
-        return "Revive Tree";
-    }
-
-    public void Interact()
-    {
+    public void Interact() {
         GameObject waterOrb = GameObject.Find("WaterOrb");
         GameObject earthOrb = GameObject.Find("EarthOrb");
 
-        if (waterOrb.transform.parent.name == "Spine2" && earthOrb.transform.parent.name == "Spine2")
-        {
+        if (waterOrb.transform.parent.name == "Spine2" && earthOrb.transform.parent.name == "Spine2") {
             _mat.color = new Color(0, 255, 0);
             transform.localScale = new Vector3(1, 3, 1);
 
@@ -30,6 +19,17 @@ public class Tree : MonoBehaviour, IInteractable
             waterOrb.SetActive(false);
 
             gameObject.tag = "Untagged";
+
+            StartCoroutine("Finish");
         }
+    }
+
+    public string GetDescription() => "Finish";
+
+    public string GetKeyToPress() => "E";
+
+    private IEnumerator Finish() {
+        yield return new WaitForSeconds(2);
+        SceneLoader.Load("Menu");
     }
 }

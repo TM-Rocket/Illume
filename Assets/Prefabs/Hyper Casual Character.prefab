@@ -1330,6 +1330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionUI: {fileID: 8304820644867541580}
   _interactionText: {fileID: 234333390782681218}
+  _interactionKeyText: {fileID: 2380276767562146817}
 --- !u!114 &1065081423180428708
 MonoBehaviour:
   m_ObjectHideFlags: 0

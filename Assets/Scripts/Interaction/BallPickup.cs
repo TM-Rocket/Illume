@@ -14,8 +14,7 @@ public class BallPickup : MonoBehaviour, IInteractable
     private string description = "Pickup";
     private bool dropped = true;
 
-    private void Pickup()
-    {
+    private void Pickup() {
         transform.parent = GameObject.Find("RightHand").transform;
         transform.localPosition = _pickupPosition;
         transform.localEulerAngles = _pickupRotation;
@@ -24,14 +23,12 @@ public class BallPickup : MonoBehaviour, IInteractable
         dropped = false;
     }
 
-    private void Drop()
-    {
+    private void Drop() {
         RaycastHit hit;
         float distance = 10f;
         Vector3 targetLocation;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, distance))
-        {
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, distance)) {
             targetLocation = hit.point;
 
             transform.parent = GameObject.Find("Interactables").transform;
@@ -43,20 +40,15 @@ public class BallPickup : MonoBehaviour, IInteractable
         }
     }
 
-    public string GetDescription()
-    {
-        return description;
-    }
+    public string GetDescription() => description;
 
-    public void Interact()
-    {
-        if (dropped)
-        {
+    public void Interact() {
+        if (dropped) {
             Pickup();
-        }
-        else
-        {
+        } else {
             Drop();
         }
     }
+
+    public string GetKeyToPress() => "E";
 }

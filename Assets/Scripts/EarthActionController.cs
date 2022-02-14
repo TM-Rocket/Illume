@@ -28,8 +28,6 @@ public class EarthActionController : MonoBehaviour, IInteractable {
         }
     }
 
-    public string GetDescription() => "Cast";
-
     public void Interact() {
         if (_objectSet.Count > 1) {
             UpdateMultipleEarthActions();
@@ -37,4 +35,8 @@ public class EarthActionController : MonoBehaviour, IInteractable {
             UpdateSingleEarthAction();
         }
     }
+
+    public string GetDescription() => "Cast";
+    
+    public string GetKeyToPress() => "F";
 }
