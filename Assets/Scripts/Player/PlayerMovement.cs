@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
     [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private float _pushPower = 2f;
+    [SerializeField] private float zPosition = 0f;
     private CharacterController _controller;
     private PlayerInput _playerInput;
     private InputAction _movementAction;
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     private InputAction _interactAction;
     private Vector3 _move;
     private Vector3 _playerVelocity;
+    private Vector3 _movementOffset;
     private bool _groundedPlayer;
     private Animator _animator;
     private int _isRunningHash;
@@ -37,6 +39,11 @@ public class PlayerMovement : MonoBehaviour {
             _animator.SetBool(_isJumpingHash, false);
             _playerVelocity.y = 0f;
         }
+
+        if(transform.position.z != zPosition) {
+            _movementOffset.z = (zPosition - transform.position.z) * 0.05f;
+        }
+        _controller.Move(_movementOffset); // Apply force to pull player back to desired Z-axis value
 
         //Player Movement and animation read from input
         Vector2 input = _movementAction.ReadValue<Vector2>();
