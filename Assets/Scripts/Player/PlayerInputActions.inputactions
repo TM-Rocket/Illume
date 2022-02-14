@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "30eb5cb2-78a9-4333-8db3-0ffa39bfa993",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
@@ -17,6 +17,22 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "55f9f178-7359-4316-b2f1-96e4ed65cda8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "e4f2ab3d-9153-4b03-a47e-4bc1e4ee4d19",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "EarthAction",
+                    "type": "Button",
+                    "id": "d8ffa870-e4ab-4b4f-8b0c-dfa24315ca42",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -80,12 +96,78 @@
                 },
                 {
                     "name": "",
+                    "id": "10fcab8b-bae9-4d76-b456-f33cbd189943",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "0ad52171-aa1e-4cfe-8f74-33937b1fc8cb",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e50601b5-dd6c-49b4-9f9b-129e68b783ab",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14f857c3-d3c6-4150-9d6d-2258779f2976",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d1099ba-720e-4ec1-8cc6-09056541877b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f54ea182-0684-45d8-a0e5-d5f5ad41b803",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EarthAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bb4f5d5-8827-4977-ae08-e61c8ac19a4f",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EarthAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
