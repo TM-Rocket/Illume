@@ -1,0 +1,96 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
+public class PlayerMovement : MonoBehaviour {
+
+    [SerializeField] private float _jumpHeight = 1f;
+    [SerializeField] private float _pushPower = 2f;
+    [SerializeField] private float zPosition = 0f;
+    private CharacterController _controller;
+    private PlayerInput _playerInput;
+    private InputAction _movementAction;
+    private InputAction _jumpAction;
+    private InputAction _interactAction;
+    private Vector3 _move;
+    private Vector3 _playerVelocity;
+    private Vector3 _movementOffset;
+    private bool _groundedPlayer;
+    private Animator _animator;
+    private int _isRunningHash;
+    private int _isJumpingHash;
+    private float _jumpTimeCounter;
+    private float _jumpTime;
+    private bool _isJumpingBool;
+
+    private void Start() {
+        _animator = GetComponent<Animator>();
+        _controller = GetComponent<CharacterController>();
+        _playerInput = GetComponent<PlayerInput>();
+        _movementAction = _playerInput.actions["Movement"];
+        _jumpAction = _playerInput.actions["Jump"];
+
+        // Animation bool values
+        _isRunningHash = Animator.StringToHash("isRunning");
+        _isJumpingHash = Animator.StringToHash("isJumping");
+    } 
+
+    private void Update() {
+
+        // Checks if player is grounded, if so changes Jumping animation value.
+        if (_groundedPlayer && _playerVelocity.y < 0) {
+            _animator.SetBool(_isJumpingHash, false);
+            _playerVelocity.y = 0f;
+        }
+
+        if(transform.position.z != zPosition) {
+            _movementOffset.z = (zPosition - transform.position.z) * 0.05f;
+        }
+        _controller.Move(_movementOffset); // Apply force to pull player back to desired Z-axis value
+
+        //Player Movement and animation read from input
+        Vector2 input = _movementAction.ReadValue<Vector2>();
+        _move = new Vector3(input.x, 0, 0);
+        _controller.Move(_move * Time.deltaTime * 5); // Move player using _move vector from player input
+        if (_move.x == 0) {
+            _animator.SetBool(_isRunningHash, false);
+        } else {
+            _animator.SetBool(_isRunningHash, true);
+            transform.rotation = Quaternion.LookRotation(_move); // Makes sure Player is facing the correct direction
+        }
+
+        // Player jump input and animation
+        if (_jumpAction.triggered && _groundedPlayer) {
+            _animator.SetBool(_isJumpingHash, true);
+            if (jumpTimeCounter > 0) {
+                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -7.0f * -9.81f); // Jump + gravity
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -7.0f * -9.81f); // Jump + gravity
+        }
+
+        _playerVelocity.y += -40f * Time.deltaTime; // Brings player back down to ground
+        _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
+
+        _groundedPlayer = _controller.isGrounded; // Character controller grounded check
+
+
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        Rigidbody body = hit.collider.attachedRigidbody;    
+
+        // No pushable Rigidbody exists
+        if (body == null || body.isKinematic) {
+            return;
+        }
+
+        // Don't push objects below the character
+        if (hit.moveDirection.y < -0.3) {
+            return;
+        }
+
+        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.velocity = pushDirection * _pushPower;
+    }
+}
