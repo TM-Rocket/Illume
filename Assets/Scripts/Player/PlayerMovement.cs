@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour {
 
     [SerializeField] private float _jumpHeight = 1f;
+    [SerializeField] private float _pushPower = 2f;
     [SerializeField] private float zPosition = 0f;
     private CharacterController _controller;
     private PlayerInput _playerInput;
     private InputAction _movementAction;
     private InputAction _jumpAction;
+    private InputAction _interactAction;
     private Vector3 _move;
     private Vector3 _playerVelocity;
     private Vector3 _movementOffset;
@@ -18,8 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     private int _isRunningHash;
     private int _isJumpingHash;
 
-    // Start is called before the first frame update
-    void Start() {
+    private void Start() {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
@@ -31,8 +32,7 @@ public class PlayerMovement : MonoBehaviour {
         _isJumpingHash = Animator.StringToHash("isJumping");
     } 
 
-    // Update is called once per frame
-    void Update() {
+    private void Update() {
 
         // Checks if player is grounded, if so changes Jumping animation value.
         if (_groundedPlayer && _playerVelocity.y < 0) {
@@ -66,5 +66,22 @@ public class PlayerMovement : MonoBehaviour {
         _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
 
         _groundedPlayer = _controller.isGrounded; // Character controller grounded check
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        Rigidbody body = hit.collider.attachedRigidbody;    
+
+        // No pushable Rigidbody exists
+        if (body == null || body.isKinematic) {
+            return;
+        }
+
+        // Don't push objects below the character
+        if (hit.moveDirection.y < -0.3) {
+            return;
+        }
+
+        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.velocity = pushDirection * _pushPower;
     }
 }
