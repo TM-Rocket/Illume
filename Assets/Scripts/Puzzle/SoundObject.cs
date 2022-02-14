@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SoundObject : MonoBehaviour, IInteractable
-{
+public class SoundObject : MonoBehaviour, IInteractable {
     private Renderer _renderer;
 
     [HideInInspector] 
