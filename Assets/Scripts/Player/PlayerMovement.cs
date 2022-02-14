@@ -65,7 +65,27 @@ public class PlayerMovement : MonoBehaviour {
         _playerVelocity.y += -40f * Time.deltaTime; // Brings player back down to ground
         _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
 
-        _groundedPlayer = _controller.isGrounded; // Character controller grounded check
+        _groundedPlayer = GroundedCheck(); // Character controller grounded check
+    }
+
+    private bool GroundedCheck() //check if the player is touching the ground or very close to touching the ground
+    {
+        if (_controller.isGrounded) //built-in controller is grounded check
+        {
+            return true;
+        }
+
+        RaycastHit hit; //creates raycast "hit"
+
+        //if the bottom of the player is within 0.2m of the ground and the player is not currently moving up
+        if (Physics.Raycast(_controller.transform.position, new Vector3(0, -1, 0), out hit, 0.2f) && _playerVelocity.y <= 0)
+        {
+            //move the player down the distance of the raycast hit
+            _controller.Move(new Vector3(0, -hit.distance, 0));
+            return true;
+        }
+
+        return false;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
