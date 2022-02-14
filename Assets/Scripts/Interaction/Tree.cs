@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour, IInteractable
 {
+    private Material _mat;
+
+    private void Start()
+    {
+        _mat = GetComponent<MeshRenderer>().material;
+    }
+
     public string GetDescription()
     {
         return "Revive Tree";
@@ -11,9 +18,18 @@ public class Tree : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (GameObject.Find("WaterOrb").transform.parent.name == "Spine2" && GameObject.Find("EarthOrb").transform.parent.name == "Spine2")
+        GameObject waterOrb = GameObject.Find("WaterOrb");
+        GameObject earthOrb = GameObject.Find("EarthOrb");
+
+        if (waterOrb.transform.parent.name == "Spine2" && earthOrb.transform.parent.name == "Spine2")
         {
-            Debug.Log("WIN WIN WIN");
+            _mat.color = new Color(0, 255, 0);
+            transform.localScale = new Vector3(1, 3, 1);
+
+            earthOrb.SetActive(false);
+            waterOrb.SetActive(false);
+
+            gameObject.tag = "Untagged";
         }
     }
 }

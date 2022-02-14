@@ -5,17 +5,17 @@ using UnityEngine;
 public class PressurePlate : MonoBehaviour
 {
     [SerializeField]
-    private float _checkRadius = 4f;
+    private GameObject _door;
 
     private void Check()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _checkRadius);
+        Collider[] hitColliders = Physics.OverlapBox(transform.position, transform.localScale);
 
         foreach (Collider hit in hitColliders)
         {
-            if (hit.CompareTag("Interactables"))
+            if (hit.CompareTag("Interactable") && hit.transform.parent.name != "RightHand")
             {
-                //Test
+                _door.SetActive(false);
             }
         }
     }
@@ -23,6 +23,6 @@ public class PressurePlate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Check();
     }
 }

@@ -26,11 +26,11 @@ public class OrbPickup : MonoBehaviour, IInteractable
         transform.parent = GameObject.Find("Spine2").transform;
         if (_orbNum == 1)
         {
-            _mat.color = new Color(255, 0, 0);
+            _mat.color = new Color(0, 0, 255);
             transform.localPosition = _pickupPositions[0];
             transform.localEulerAngles = _pickupRotations[0];
         }
-        else
+        else if (_orbNum == 2)
         {
             _mat.color = new Color(0, 255, 0);
             transform.localPosition = _pickupPositions[1];
