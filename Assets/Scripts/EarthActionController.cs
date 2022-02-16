@@ -1,31 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthActionController : MonoBehaviour {
+public class EarthActionController : MonoBehaviour, IInteractable {
     [SerializeField]
     [Tooltip("Set of objects the player can toggle from. If only one object is present that object will be toggled with nothing.")]
     private List<GameObject> _objectSet;
-    [SerializeField]
-    private float _effectRadius = 1.0f;
 
     private int _activeObjectIndex = 0;
-
-    private void Update() {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _effectRadius);
-
-        foreach (Collider hit in hitColliders) {
-            if (hit.CompareTag("Player")) {
-                // TODO: How can I get InputActions here?
-                if (Input.GetKeyDown(KeyCode.F)) {
-                    if (_objectSet.Count > 1) {
-                        UpdateMultipleEarthActions();
-                    } else {
-                        UpdateSingleEarthAction();
-                    }
-                }
-            }  
-        }
-    }
 
     private void UpdateMultipleEarthActions() {
         _objectSet[_activeObjectIndex].SetActive(false);
@@ -47,9 +28,15 @@ public class EarthActionController : MonoBehaviour {
         }
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.color = new Color(0.0f, 1.0f, 0.5f, 0.4f);
-        Gizmos.DrawSphere(transform.position, _effectRadius);    
+    public void Interact() {
+        if (_objectSet.Count > 1) {
+            UpdateMultipleEarthActions();
+        } else {
+            UpdateSingleEarthAction();
+        }
     }
 
+    public string GetDescription() => "Cast";
+    
+    public string GetKeyToPress() => "F";
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class SoundPuzzle : MonoBehaviour {
     private List<AudioClip> _puzzleSounds;
 
     private bool _haveAnswersBeenPlayed; 
+    private float _playbackDelay = 0f;
 
     [HideInInspector]
     public static List<SoundObject> AnswerKey = new List<SoundObject>();
@@ -39,15 +41,11 @@ public class SoundPuzzle : MonoBehaviour {
     private void Update() {
         // Cast a sphere to detect player and playback the answerkey for them
         if (!_haveAnswersBeenPlayed) {
-            float playbackDelay = 0;
             Collider[] hitColliders = Physics.OverlapSphere(_playbackArea.position, _playbackRadius);
 
             foreach (Collider hit in hitColliders) {
                 if (hit.CompareTag("Player")) {
-                    foreach(SoundObject soundObject in AnswerKey) {
-                        soundObject.SoundSource.PlayDelayed((ulong) playbackDelay);
-                        playbackDelay = soundObject.SoundClip.length;
-                    }
+                    StartCoroutine("PlaySoundClips");
 
                     _haveAnswersBeenPlayed = true;
                     break;
@@ -61,6 +59,15 @@ public class SoundPuzzle : MonoBehaviour {
             _door.SetActive(false);
         } else if (IsIncorrect()) {
             PlayerAnswers.Clear();
+        }
+    }
+
+    private IEnumerator PlaySoundClips() {
+        foreach(SoundObject soundObject in AnswerKey) {
+            _playbackDelay = soundObject.SoundClip.length;
+            soundObject.SoundSource.Play();
+
+            yield return new WaitForSeconds(_playbackDelay);
         }
     }
 

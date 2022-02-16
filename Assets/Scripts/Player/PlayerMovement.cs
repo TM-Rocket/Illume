@@ -69,7 +69,8 @@ public class PlayerMovement : MonoBehaviour {
         _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
 
 
-        if (_waterAction.triggered) {
+        // TODO: Make this less hacky
+        if (_waterAction.triggered && GameObject.Find("WaterOrb").transform.parent.name == "Spine2") {
             _waterFlow.Play();
         }
 
