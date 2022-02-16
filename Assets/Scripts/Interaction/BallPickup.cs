@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BallPickup : MonoBehaviour, IInteractable
-{
+public class BallPickup : MonoBehaviour, IInteractable {
     private Material _mat;
 
     [SerializeField]

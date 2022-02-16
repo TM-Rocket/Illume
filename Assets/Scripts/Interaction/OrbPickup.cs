@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbPickup : MonoBehaviour, IInteractable
-{
+public class OrbPickup : MonoBehaviour, IInteractable {
     private Material _mat;
 
     [SerializeField]
