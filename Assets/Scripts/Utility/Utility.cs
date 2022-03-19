@@ -8,15 +8,17 @@ public static class Utility {
     /// Shuffles a Generic List based on a Random seed.
     /// Use Array.ToList() to shuffle arrays.
     ///</summary>
-    public static void Shuffle<T>(this IList<T> list) {
-        int n = list.Count - 1;
+    public static List<T> Shuffle<T>(this IList<T> list) {
+        int n = list.Count;
 
-        for (int i = n; i != 0; i--) {
-            int k = seed.Next(n);
-
+        while (n > 1) {
+            n--;
+            int k = seed.Next(n + 1);
             T value = list[k];
             list[k] = list[n];
             list[n] = value;
         }
+
+        return list as List<T>;
     }
 }
