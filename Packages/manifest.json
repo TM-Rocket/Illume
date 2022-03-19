@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.oddworm.copylightingsettings": "https://github.com/pschraut/UnityCopyLightingSettings.git#1.6.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.cinemachine": "2.7.9",
@@ -10,7 +11,7 @@
     "com.unity.postprocessing": "3.1.1",
     "com.unity.probuilder": "5.0.4",
     "com.unity.progrids": "3.0.3-preview.6",
-    "com.unity.test-framework": "1.1.30",
+    "com.unity.test-framework": "1.1.31",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.5.7",
     "com.unity.ugui": "1.0.0",

@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.oddworm.copylightingsettings": {
+      "version": "https://github.com/pschraut/UnityCopyLightingSettings.git#1.6.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c6dfbb2c3823117e55e04b95ae1598ad3c20e403"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -102,7 +109,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.30",
+      "version": "1.1.31",
       "depth": 0,
       "source": "registry",
       "dependencies": {
