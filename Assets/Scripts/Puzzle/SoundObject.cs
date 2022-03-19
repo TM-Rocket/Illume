@@ -36,7 +36,6 @@ public class SoundObject : MonoBehaviour, IInteractable {
             SoundSource.Play();
 
             SoundPuzzle.PlayerAnswers.Add(this);
-            Debug.Log(this);
 
             if (!SoundPuzzle.IsSolved()) {
                 _renderer.material.SetColor("_Color", Color.yellow);
