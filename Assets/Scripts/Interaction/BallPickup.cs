@@ -12,7 +12,7 @@ public class BallPickup : MonoBehaviour, IInteractable {
     private bool dropped = true;
 
     private void Pickup() {
-        transform.parent = GameObject.Find("RightHand").transform;
+        transform.parent = GameObject.Find("Fist.R_end").transform;
         transform.localPosition = _pickupPosition;
         transform.localEulerAngles = _pickupRotation;
 
