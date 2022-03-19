@@ -8,11 +8,11 @@ public class PressurePlate : MonoBehaviour {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 0.7f);
 
         foreach (Collider hit in hitColliders) {
-            if (hit.CompareTag("Interactable") && hit.transform.parent.name != "RightHand") {
+            if (hit.CompareTag("Interactable") && hit.transform.parent.name != "Fist.R_end") {
                 _door.SetActive(false);
             }
 
-            if (hit.CompareTag("Interactable") && hit.transform.parent.name == "RightHand") {
+            if (hit.CompareTag("Interactable") && hit.transform.parent.name == "Fist.R_end") {
                 _door.SetActive(true);
             }
         }
