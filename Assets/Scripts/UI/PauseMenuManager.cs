@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PauseMenuManager : MonoBehaviour {
     [SerializeField]
-    private GameObject _pauseMenu;
+    private GameObject _pauseMenuUI;
     [SerializeField]
     [Tooltip("Controls the enabling/disabling of this player controller while pausing")]
     private PlayerMovement _playerController;
@@ -20,7 +20,7 @@ public class PauseMenuManager : MonoBehaviour {
     }
 
     public void ShowPauseMenu() {
-        _pauseMenu.SetActive(true);
+        _pauseMenuUI.SetActive(true);
         _playerController.OnDisable();
 
         _isPauseMenuUp = true;
@@ -29,7 +29,7 @@ public class PauseMenuManager : MonoBehaviour {
     }
 
     public void ClearPauseMenu() {
-        _pauseMenu.SetActive(false);
+        _pauseMenuUI.SetActive(false);
         _playerController.OnEnable();
 
         _isPauseMenuUp = false;
