@@ -17,7 +17,7 @@ public class OrbPickup : MonoBehaviour, IInteractable {
     private void Pickup() {
         gameObject.tag = "Untagged";
 
-        transform.parent = GameObject.Find("Spine2").transform;
+        transform.parent = GameObject.Find("Torso").transform;
         if (_orbNum == 1) {
             _mat.color = new Color(0, 0, 255);
             transform.localPosition = _pickupPositions[0];
