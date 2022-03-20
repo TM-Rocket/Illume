@@ -12,6 +12,7 @@
 /[Aa]ssets/Samples/
 /[Aa]ssets/ProBuilder Data*
 /[Pp]rojectSettings/Packages/com.unity.probuilder
+/[Aa]ssets/Materials/Ocean50x50W750H750.asset
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
