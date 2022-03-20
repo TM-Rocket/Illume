@@ -3,31 +3,26 @@ using UnityEditorInternal;
 using UnityEngine;
 
 [CustomEditor(typeof(GeometryGrassPainter))]
-public class GrassPainterEditor : Editor
-{
+public class GrassPainterEditor : Editor {
     GeometryGrassPainter grassPainter;
     readonly string[] toolbarStrings = { "Add", "Remove", "Edit" };
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         grassPainter = (GeometryGrassPainter)target;
     }
 
-    void OnSceneGUI()
-    {
+    void OnSceneGUI() {
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(grassPainter.hitPosGizmo, grassPainter.hitNormal, grassPainter.brushSize);
         Handles.color = new Color(0, 0.5f, 0.5f, 0.4f);
         Handles.DrawSolidDisc(grassPainter.hitPosGizmo, grassPainter.hitNormal, grassPainter.brushSize);
-        if (grassPainter.toolbarInt == 1)
-        {
+        if (grassPainter.toolbarInt == 1) {
             Handles.color = Color.red;
             Handles.DrawWireDisc(grassPainter.hitPosGizmo, grassPainter.hitNormal, grassPainter.brushSize);
             Handles.color = new Color(0.5f, 0f, 0f, 0.4f);
             Handles.DrawSolidDisc(grassPainter.hitPosGizmo, grassPainter.hitNormal, grassPainter.brushSize);
         }
-        if (grassPainter.toolbarInt == 2)
-        {
+        if (grassPainter.toolbarInt == 2) {
             Handles.color = Color.yellow;
             Handles.DrawWireDisc(grassPainter.hitPosGizmo, grassPainter.hitNormal, grassPainter.brushSize);
             Handles.color = new Color(0.5f, 0.5f, 0f, 0.4f);
@@ -35,8 +30,7 @@ public class GrassPainterEditor : Editor
         }
     }
 
-    public override void OnInspectorGUI()
-    {
+    public override void OnInspectorGUI() {
         EditorGUILayout.LabelField("Grass Limit", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField(grassPainter.i.ToString() + "/", EditorStyles.label);
@@ -69,11 +63,9 @@ public class GrassPainterEditor : Editor
         grassPainter.rangeG = EditorGUILayout.Slider("Green", grassPainter.rangeG, 0f, 1f);
         grassPainter.rangeB = EditorGUILayout.Slider("Blue", grassPainter.rangeB, 0f, 1f);
 
-        if (GUILayout.Button("Clear Mesh"))
-        {
+        if (GUILayout.Button("Clear Mesh")) {
             if (EditorUtility.DisplayDialog("Clear Painted Mesh?",
-               "Are you sure you want to clear the mesh?", "Clear", "Don't Clear"))
-            {
+               "Are you sure you want to clear the mesh?", "Clear", "Don't Clear")) {
                 grassPainter.ClearMesh();
             }
         }
