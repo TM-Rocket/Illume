@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour {
     } 
 
     private void Update() {
-
         // Checks if player is grounded, if so changes Jumping animation value.
         if (_groundedPlayer && _playerVelocity.y < 0) {
             _animator.SetBool(_isJumpingHash, false);
@@ -113,5 +112,17 @@ public class PlayerMovement : MonoBehaviour {
 
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         body.velocity = pushDirection * _pushPower;
+    }
+
+    public void OnEnable() {
+        if (_movementAction != null && _jumpAction != null) {
+            _movementAction.Enable();
+            _jumpAction.Enable();
+        }
+    }
+
+    public void OnDisable() {
+        _movementAction.Disable();
+        _jumpAction.Disable();
     }
 }

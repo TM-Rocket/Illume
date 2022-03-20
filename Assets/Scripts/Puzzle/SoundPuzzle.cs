@@ -35,7 +35,7 @@ public class SoundPuzzle : MonoBehaviour {
             AnswerKey.Add(_soundObjects[i]);
         }
 
-        Utility.Shuffle(AnswerKey);
+        AnswerKey = Utility.Shuffle(AnswerKey);
     }
 
     private void Update() {
