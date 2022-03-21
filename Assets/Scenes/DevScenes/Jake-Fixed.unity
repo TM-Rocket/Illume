@@ -15068,9 +15068,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 100682599}
     m_Modifications:
+    - target: {fileID: 1871014481, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
+      propertyPath: m_BeforeStackBundles.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3956756228843994195, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956756228843994204, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3956756228843994205, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
       propertyPath: field of view
