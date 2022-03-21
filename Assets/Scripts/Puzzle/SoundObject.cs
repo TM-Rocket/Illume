@@ -50,7 +50,7 @@ public class SoundObject : Interactable  {
         _isInCoroutine = true;
 
         InteractableRenderer.material.SetColor("_Color", Color.red);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(6);
         InteractableRenderer.material.SetColor("_Color", Color.white);
 
         _isInCoroutine = false;
