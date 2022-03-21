@@ -18,14 +18,17 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 _playerVelocity;
     private Vector3 _movementOffset;
     private bool _groundedPlayer;
+    private bool _isRunning;
     private Animator _animator;
     private int _isRunningHash;
     private int _isJumpingHash;
+    private AudioManager _soundManager;
 
     private void Start() {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
+        _soundManager = GameObject.Find("soundManager").GetComponent<AudioManager>();
         _movementAction = _playerInput.actions["Movement"];
         _jumpAction = _playerInput.actions["Jump"];
         _waterAction = _playerInput.actions["WaterAction"];
@@ -51,9 +54,16 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 input = _movementAction.ReadValue<Vector2>();
         _move = new Vector3(input.x, 0, 0);
         _controller.Move(_move * Time.deltaTime * 5); // Move player using _move vector from player input
-        if (_move.x == 0) {
+        if (_move.x == 0 || !_groundedPlayer) {
             _animator.SetBool(_isRunningHash, false);
+            _soundManager.Stop("walkingGrass");
+            _isRunning = false;
         } else {
+            if(!_isRunning && _groundedPlayer)
+            {   
+                _soundManager.Play("walkingGrass");
+                _isRunning = true;
+            }
             _animator.SetBool(_isRunningHash, true);
             transform.rotation = Quaternion.LookRotation(_move); // Makes sure Player is facing the correct direction
         }
