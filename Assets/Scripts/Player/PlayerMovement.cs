@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {
             _isRunning = false;
         } else {
             if(!_isRunning && _groundedPlayer)
-            {
+            {   
                 _soundManager.Play("walkingGrass");
                 _isRunning = true;
             }
