@@ -23,6 +23,8 @@ public class AudioManager : MonoBehaviour {
             s.Source.volume = s.Volume;
             s.Source.pitch = s.Pitch;
             s.Source.loop = s.Loop;
+            s.Source.time = s.Time;
+            s.Source.pitch = s.Speed;
         }
     }
 
