@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EarthActionController : MonoBehaviour, IInteractable {
+public class EarthActionController : Interactable  {
     [SerializeField]
     [Tooltip("Set of objects the player can toggle from. If only one object is present that object will be toggled with nothing.")]
     private List<GameObject> _objectSet;
@@ -28,7 +28,7 @@ public class EarthActionController : MonoBehaviour, IInteractable {
         }
     }
 
-    public void Interact() {
+    public override void Interact() {
         if (_objectSet.Count > 1) {
             UpdateMultipleEarthActions();
         } else {
@@ -36,7 +36,7 @@ public class EarthActionController : MonoBehaviour, IInteractable {
         }
     }
 
-    public string GetDescription() => "Cast";
+    public override string GetDescription() => "Cast";
     
-    public string GetKeyToPress() => "F";
+    public override string GetKeyToPress() => "F";
 }

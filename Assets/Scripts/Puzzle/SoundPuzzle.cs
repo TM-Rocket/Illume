@@ -53,11 +53,11 @@ public class SoundPuzzle : MonoBehaviour {
             }
         }
 
-
-
         if (IsSolved()) {
+            // Trigger sleep/calm bird animation
             _door.SetActive(false);
         } else if (IsIncorrect()) {
+            // Replay sound pattern to player
             PlayerAnswers.Clear();
         }
     }

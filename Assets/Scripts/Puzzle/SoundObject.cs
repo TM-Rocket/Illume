@@ -1,17 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class SoundObject : MonoBehaviour, IInteractable {
-    private Renderer _renderer;
-
+public class SoundObject : Interactable  {
     [HideInInspector] 
     public AudioClip SoundClip;
     [HideInInspector] 
     public AudioSource SoundSource;
 
     private bool _isInCoroutine = false;
-
-    private void Awake() => _renderer = gameObject.GetComponent<Renderer>();
 
     private void Start() {
         SoundSource = gameObject.AddComponent<AudioSource>();
@@ -24,13 +20,16 @@ public class SoundObject : MonoBehaviour, IInteractable {
 
     private void Update() {
         if (SoundPuzzle.IsSolved()) {
-            _renderer.material.SetColor("_Color", Color.green);
+            InteractableRenderer.material.SetColor("_Color", Color.green);
+
+            // Disable the interaction once the puzzle is complete
+            IsEnabled = false;
         } else if (SoundPuzzle.IsIncorrect()) {
             StartCoroutine("FlashBlockColor");
         } 
     }
 
-    public void Interact() {
+    public override void Interact() {
         // Only play sounds when puzzle isn't solved and 'Red' blocks aren't flashing
         if (!SoundPuzzle.IsSolved() && !_isInCoroutine) {
             SoundSource.Play();
@@ -38,21 +37,21 @@ public class SoundObject : MonoBehaviour, IInteractable {
             SoundPuzzle.PlayerAnswers.Add(this);
 
             if (!SoundPuzzle.IsSolved()) {
-                _renderer.material.SetColor("_Color", Color.yellow);
+                InteractableRenderer.material.SetColor("_Color", Color.yellow);
             }
         }
     }
 
-    public string GetDescription() => "Press";
+    public override string GetDescription() => "Press";
 
-    public string GetKeyToPress() => "E";
+    public override string GetKeyToPress() => "E";
 
     private IEnumerator FlashBlockColor() {
         _isInCoroutine = true;
 
-        _renderer.material.SetColor("_Color", Color.red);
+        InteractableRenderer.material.SetColor("_Color", Color.red);
         yield return new WaitForSeconds(2);
-        _renderer.material.SetColor("_Color", Color.white);
+        InteractableRenderer.material.SetColor("_Color", Color.white);
 
         _isInCoroutine = false;
     }
