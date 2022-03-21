@@ -110,8 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e4ce51ac5a71b4595fc515a0c1c6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactParticle: {fileID: 0}
-  _particleDetectionRadius: 0
+  IsEnabled: 1
   SoundClip: {fileID: 0}
   SoundSource: {fileID: 0}
 --- !u!1 &7184322275662523937
@@ -224,8 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e4ce51ac5a71b4595fc515a0c1c6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactParticle: {fileID: 5709868649718418196, guid: 19af2679c58805a4db27e1ac5bff4847, type: 3}
-  _particleDetectionRadius: 2
+  IsEnabled: 1
   SoundClip: {fileID: 0}
   SoundSource: {fileID: 0}
 --- !u!1 &7184322275892903774
@@ -284,7 +282,7 @@ MonoBehaviour:
   _puzzleSounds:
   - {fileID: 8300000, guid: 8e3d608e80b5bb24ab426ae82ad00233, type: 3}
   - {fileID: 8300000, guid: 21a64aa8a69e84940b96e936e19f61fe, type: 3}
-  - {fileID: 8300000, guid: 92b539cf3308378459842f088ea9ef1c, type: 3}
+  - {fileID: 8300000, guid: f04768d0cbeb1d249b14a19fe5065c16, type: 3}
 --- !u!1 &7184322276008301614
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,8 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e4ce51ac5a71b4595fc515a0c1c6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactParticle: {fileID: 0}
-  _particleDetectionRadius: 0
+  IsEnabled: 1
   SoundClip: {fileID: 0}
   SoundSource: {fileID: 0}
 --- !u!1 &7184322276470833150
