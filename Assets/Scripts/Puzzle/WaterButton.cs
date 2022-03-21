@@ -1,21 +1,18 @@
 using UnityEngine;
 
-public class WaterButton : MonoBehaviour, IInteractable {
-    private Renderer _renderer;
+public class WaterButton : Interactable {
     private bool _isPressed;
 
-    private void Awake() => _renderer = GetComponent<Renderer>();
-
-    public void Interact() { 
+    public override void Interact() { 
         if (!WaterPuzzle.IsSolved() && !_isPressed) {
             WaterPuzzle.PressedButtons.Add(this);
 
-            _renderer.material.SetColor("_Color", Color.green);
+            InteractableRenderer.material.SetColor("_Color", Color.green);
             _isPressed = true;
         }
     } 
 
-    public string GetDescription() => "Press";
+    public override string GetDescription() => "Press";
 
-    public string GetKeyToPress() => "E";
+    public override string GetKeyToPress() => "E";
 }

@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+public class WaterActionController : Interactable {
+    public override void Interact() { }
 
-public class WaterActionController : MonoBehaviour, IInteractable {
-    // Handled by ParticleEffects
-    public void Interact() { }
+    public override string GetDescription() => "Tap";
 
-    public string GetDescription() => "Tap";
-
-    public string GetKeyToPress() => "R";
+    public override string GetKeyToPress() => "R";
 }

@@ -1,8 +1,6 @@
 using UnityEngine;
 
-public class BallPickup : MonoBehaviour, IInteractable {
-    private Material _mat;
-
+public class BallPickup : Interactable {
     [SerializeField]
     private Vector3 _pickupPosition;
     [SerializeField]
@@ -10,7 +8,7 @@ public class BallPickup : MonoBehaviour, IInteractable {
 
     private string description = "Pickup";
     private bool dropped = true;
-
+    
     private void Pickup() {
         transform.parent = GameObject.Find("Fist.R_end").transform;
         transform.localPosition = _pickupPosition;
@@ -37,9 +35,8 @@ public class BallPickup : MonoBehaviour, IInteractable {
         }
     }
 
-    public string GetDescription() => description;
 
-    public void Interact() {
+    public override void Interact() {
         if (dropped) {
             Pickup();
         } else {
@@ -47,5 +44,7 @@ public class BallPickup : MonoBehaviour, IInteractable {
         }
     }
 
-    public string GetKeyToPress() => "E";
+    public override string GetDescription() => description;
+
+    public override string GetKeyToPress() => "E";
 }

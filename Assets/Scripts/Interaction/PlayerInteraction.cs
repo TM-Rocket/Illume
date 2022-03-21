@@ -17,7 +17,7 @@ public class PlayerInteraction : MonoBehaviour {
         if (other.gameObject.tag == "Interactable") {
             _interactObject = other.gameObject;
 
-            IInteractable interactable = other.GetComponent<IInteractable>();
+            Interactable interactable = other.GetComponent<Interactable>();
 
             if (interactable != null) {
                 _canInteract = true;
@@ -39,7 +39,7 @@ public class PlayerInteraction : MonoBehaviour {
     private void Update() {
         // Collision detection and object remains interactable
         if (_canInteract == true && _interactObject.tag == "Interactable") {
-            IInteractable interactable = _interactObject.GetComponent<IInteractable>();
+            Interactable interactable = _interactObject.GetComponent<Interactable>();
             _interactionText.text = interactable.GetDescription();
 
             if (interactable.GetKeyToPress().Equals("E")) {
