@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 public class MainMenuManager : MonoBehaviour {
@@ -8,6 +9,10 @@ public class MainMenuManager : MonoBehaviour {
     private CinemachineVirtualCamera _mainMenuVCam;
     [SerializeField] 
     private CinemachineVirtualCamera _playerVCam;
+    [Header("Menu Buttons")]
+    [SerializeField]
+    [Tooltip("Used to select the start button for gamepads when the menu loads")]
+    private Button _startButton;
 
     [HideInInspector]
     public static bool IsMainMenuFocused = true;
@@ -16,6 +21,7 @@ public class MainMenuManager : MonoBehaviour {
         // Ensure priorities are setup properly
         _mainMenuVCam.Priority = 1;
         _playerVCam.Priority = 0;
+        _startButton.Select();
     }
 
     public void SwitchToPlayerCamera() {

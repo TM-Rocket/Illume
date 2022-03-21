@@ -43,7 +43,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""EarthAction"",
+                    ""name"": ""StoneAction"",
                     ""type"": ""Button"",
                     ""id"": ""d8ffa870-e4ab-4b4f-8b0c-dfa24315ca42"",
                     ""expectedControlType"": ""Button"",
@@ -51,7 +51,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""WaterAction"",
+                    ""name"": ""SwtichStones"",
                     ""type"": ""Button"",
                     ""id"": ""c26fecbf-ad9a-4614-9590-4e8345b0bb40"",
                     ""expectedControlType"": ""Button"",
@@ -232,18 +232,18 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""EarthAction"",
+                    ""action"": ""StoneAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""7bb4f5d5-8827-4977-ae08-e61c8ac19a4f"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""EarthAction"",
+                    ""action"": ""StoneAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -254,18 +254,18 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""WaterAction"",
+                    ""action"": ""SwtichStones"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""2cb08c72-c107-4075-9698-fb4a016f1c83"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""WaterAction"",
+                    ""action"": ""SwtichStones"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -279,8 +279,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_EarthAction = m_Player.FindAction("EarthAction", throwIfNotFound: true);
-        m_Player_WaterAction = m_Player.FindAction("WaterAction", throwIfNotFound: true);
+        m_Player_StoneAction = m_Player.FindAction("StoneAction", throwIfNotFound: true);
+        m_Player_SwtichStones = m_Player.FindAction("SwtichStones", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -333,8 +333,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_EarthAction;
-    private readonly InputAction m_Player_WaterAction;
+    private readonly InputAction m_Player_StoneAction;
+    private readonly InputAction m_Player_SwtichStones;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -342,8 +342,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @EarthAction => m_Wrapper.m_Player_EarthAction;
-        public InputAction @WaterAction => m_Wrapper.m_Player_WaterAction;
+        public InputAction @StoneAction => m_Wrapper.m_Player_StoneAction;
+        public InputAction @SwtichStones => m_Wrapper.m_Player_SwtichStones;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -362,12 +362,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @EarthAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEarthAction;
-                @EarthAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEarthAction;
-                @EarthAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEarthAction;
-                @WaterAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWaterAction;
-                @WaterAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWaterAction;
-                @WaterAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWaterAction;
+                @StoneAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStoneAction;
+                @StoneAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStoneAction;
+                @StoneAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStoneAction;
+                @SwtichStones.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwtichStones;
+                @SwtichStones.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwtichStones;
+                @SwtichStones.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwtichStones;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -381,12 +381,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @EarthAction.started += instance.OnEarthAction;
-                @EarthAction.performed += instance.OnEarthAction;
-                @EarthAction.canceled += instance.OnEarthAction;
-                @WaterAction.started += instance.OnWaterAction;
-                @WaterAction.performed += instance.OnWaterAction;
-                @WaterAction.canceled += instance.OnWaterAction;
+                @StoneAction.started += instance.OnStoneAction;
+                @StoneAction.performed += instance.OnStoneAction;
+                @StoneAction.canceled += instance.OnStoneAction;
+                @SwtichStones.started += instance.OnSwtichStones;
+                @SwtichStones.performed += instance.OnSwtichStones;
+                @SwtichStones.canceled += instance.OnSwtichStones;
             }
         }
     }
@@ -396,7 +396,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnEarthAction(InputAction.CallbackContext context);
-        void OnWaterAction(InputAction.CallbackContext context);
+        void OnStoneAction(InputAction.CallbackContext context);
+        void OnSwtichStones(InputAction.CallbackContext context);
     }
 }

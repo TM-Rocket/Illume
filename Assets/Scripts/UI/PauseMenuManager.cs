@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour {
     [SerializeField]
@@ -6,6 +7,10 @@ public class PauseMenuManager : MonoBehaviour {
     [SerializeField]
     [Tooltip("Controls the enabling/disabling of this player controller while pausing")]
     private PlayerMovement _playerController;
+    [Header("Menu Buttons")]
+    [SerializeField]
+    [Tooltip("Used to select the start button for gamepads when the menu loads")]
+    private Button _resumeButton;
 
     private bool _isPauseMenuUp = false;
 
@@ -20,6 +25,7 @@ public class PauseMenuManager : MonoBehaviour {
     }
 
     public void ShowPauseMenu() {
+        _resumeButton.Select();
         _pauseMenuUI.SetActive(true);
         _playerController.OnDisable();
 

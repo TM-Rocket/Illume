@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "EarthAction",
+                    "name": "StoneAction",
                     "type": "Button",
                     "id": "d8ffa870-e4ab-4b4f-8b0c-dfa24315ca42",
                     "expectedControlType": "Button",
@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "WaterAction",
+                    "name": "SwtichStones",
                     "type": "Button",
                     "id": "c26fecbf-ad9a-4614-9590-4e8345b0bb40",
                     "expectedControlType": "Button",
@@ -219,18 +219,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "EarthAction",
+                    "action": "StoneAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "7bb4f5d5-8827-4977-ae08-e61c8ac19a4f",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "EarthAction",
+                    "action": "StoneAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -241,18 +241,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WaterAction",
+                    "action": "SwtichStones",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "2cb08c72-c107-4075-9698-fb4a016f1c83",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WaterAction",
+                    "action": "SwtichStones",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
