@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour {
-    private bool _canInteract;
-    private GameObject _interactObject;
-
     [SerializeField]
     private GameObject _interactionUI;
     [SerializeField]
@@ -12,7 +10,18 @@ public class PlayerInteraction : MonoBehaviour {
     [SerializeField]
     private Text _interactionKeyText;
 
-    // Within interaction range
+    private bool _canInteract;
+    private GameObject _interactObject;
+    private PlayerInput _playerInput;
+    private InputAction _stoneAction;
+    private InputAction _interactAction;
+
+    private void Awake() {
+        _playerInput = GetComponent<PlayerInput>();
+        _stoneAction = _playerInput.actions["StoneAction"];
+        _interactAction = _playerInput.actions["Interact"];
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Interactable") {
             _interactObject = other.gameObject;
@@ -28,7 +37,6 @@ public class PlayerInteraction : MonoBehaviour {
         }
     }
 
-    // Out of interaction range
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.tag == "Interactable") {
             _canInteract = false;
@@ -37,23 +45,20 @@ public class PlayerInteraction : MonoBehaviour {
     }
 
     private void Update() {
-        // Collision detection and object remains interactable
         if (_canInteract == true && _interactObject.tag == "Interactable") {
             Interactable interactable = _interactObject.GetComponent<Interactable>();
             _interactionText.text = interactable.GetDescription();
 
             if (interactable.GetKeyToPress().Equals("E")) {
-                if (Input.GetKeyDown(KeyCode.E)) {
+                if (_interactAction.triggered) {
                     interactable.Interact();
                 }
             } else if (interactable.GetKeyToPress().Equals("F")) {
-                if (Input.GetKeyDown(KeyCode.F)) {
+                if (_stoneAction.triggered) {
                     interactable.Interact();
                 }
             }
-        }
-        // Condition not met to interact
-        else {
+        } else {
             _canInteract = false;
             _interactionUI.SetActive(_canInteract);
             _interactObject = null;
