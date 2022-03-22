@@ -7,11 +7,15 @@ public class IntroCutsceneManager : MonoBehaviour
 {
     private PlayableDirector _part1, _part2;
     private bool _part1Played, _part2Played;
+
     // Start is called before the first frame update
     void Start()
     {
         _part1 = GetComponent<PlayableDirector>();
         _part2 = GameObject.Find("IntroCutscenePart2").GetComponent<PlayableDirector>();
+
+        FindObjectOfType<AudioManager>().Play("introBGM"); 
+
     }
 
     // Update is called once per frame
@@ -26,6 +30,11 @@ public class IntroCutsceneManager : MonoBehaviour
         {
             _part2.Play();
             _part2Played = true;
+        }
+
+        if(_part1.state != PlayState.Playing && _part2.state != PlayState.Playing)
+        {
+            FindObjectOfType<AudioManager>().Stop("introBGM"); 
         }
     }
 }
