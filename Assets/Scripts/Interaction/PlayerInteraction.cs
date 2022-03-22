@@ -6,9 +6,16 @@ public class PlayerInteraction : MonoBehaviour {
     [SerializeField]
     private GameObject _interactionUI;
     [SerializeField]
-    private Text _interactionText;
+    private Image _interactionKeyImage;
+    [Header("Button Sprites")]
     [SerializeField]
-    private Text _interactionKeyText;
+    private Sprite _XButton;
+    [SerializeField]
+    private Sprite _BButton;
+    [SerializeField]
+    private Sprite _EKey;
+    [SerializeField]
+    private Sprite _FKey;
 
     private bool _canInteract;
     private GameObject _interactObject;
@@ -30,7 +37,19 @@ public class PlayerInteraction : MonoBehaviour {
 
             if (interactable != null) {
                 _canInteract = true;
-                _interactionKeyText.text = interactable.GetKeyToPress();
+
+                if (interactable.GetKeyToPress().Equals("E") && AnyKeyMenuManager._isControllerUsedForUI) {
+                    _interactionKeyImage.sprite = _XButton;
+                } else if (interactable.GetKeyToPress().Equals("E")) {
+                    _interactionKeyImage.sprite = _EKey;
+                }
+
+                if (interactable.GetKeyToPress().Equals("F") && AnyKeyMenuManager._isControllerUsedForUI) {
+                    _interactionKeyImage.sprite = _BButton;
+                } else if (interactable.GetKeyToPress().Equals("F")) {
+                    _interactionKeyImage.sprite = _FKey;
+                }
+
                 _interactionUI.SetActive(_canInteract);
             }
         }
