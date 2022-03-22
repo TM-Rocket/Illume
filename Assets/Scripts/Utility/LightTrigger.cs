@@ -18,9 +18,14 @@ public class LightTrigger : MonoBehaviour
 
     private float progress;
 
-    void Awake()
+    void Start()
     {
         volume.profile.TryGetSettings(out _colorGradingLayer);
+
+        if (gameObject.name == "NightTrigger" || gameObject.name == "DayTrigger")
+        {
+            StartCoroutine(ChangeLighting());
+        }
     }
 
     private System.Collections.IEnumerator ChangeLighting()
