@@ -6712,6 +6712,43 @@ MonoBehaviour:
     Pitch: 1
     Time: 0.3
     Speed: 1.33
+    Fade: 0
+    Loop: 1
+    Source: {fileID: 0}
+  - Name: introBGM
+    Clip: {fileID: 8300000, guid: 3c32ad6bb9d994400a70dd5bb7cdb458, type: 3}
+    Volume: 0.1
+    Pitch: 1
+    Time: 0.3
+    Speed: 1.33
+    Fade: 1
+    Loop: 1
+    Source: {fileID: 0}
+  - Name: adventureBGM
+    Clip: {fileID: 8300000, guid: 3774d84f526134450b863f2693d1ef31, type: 3}
+    Volume: 0.02
+    Pitch: 1
+    Time: 0.3
+    Speed: 1.33
+    Fade: 1
+    Loop: 1
+    Source: {fileID: 0}
+  - Name: caveBGM
+    Clip: {fileID: 8300000, guid: 150a6bfbdc8be46cfafa0f12657653b3, type: 3}
+    Volume: 0.025
+    Pitch: 1
+    Time: 0.3
+    Speed: 1.33
+    Fade: 1
+    Loop: 1
+    Source: {fileID: 0}
+  - Name: caveSFX
+    Clip: {fileID: 8300000, guid: 5f34e468a6b6741c2938f791eb35b8cc, type: 3}
+    Volume: 0.075
+    Pitch: 1
+    Time: 0.3
+    Speed: 1.33
+    Fade: 1
     Loop: 1
     Source: {fileID: 0}
 --- !u!4 &175047801
@@ -10130,15 +10167,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5891370652719628299, guid: a55450e5b4cc0fd47bcd53dfc770f66d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -148.6304
+      value: -156.36
       objectReference: {fileID: 0}
     - target: {fileID: 5891370652719628299, guid: a55450e5b4cc0fd47bcd53dfc770f66d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.2225223
+      value: -5.1945224
       objectReference: {fileID: 0}
     - target: {fileID: 5891370652719628299, guid: a55450e5b4cc0fd47bcd53dfc770f66d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.559999
+      value: -3.9099998
       objectReference: {fileID: 0}
     - target: {fileID: 5891370652719628299, guid: a55450e5b4cc0fd47bcd53dfc770f66d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16525,6 +16562,7 @@ GameObject:
   - component: {fileID: 427713941}
   - component: {fileID: 427713940}
   - component: {fileID: 427713939}
+  - component: {fileID: 427713943}
   m_Layer: 0
   m_Name: FinalCutscene
   m_TagString: Untagged
@@ -16596,6 +16634,18 @@ Transform:
   m_Father: {fileID: 1990531296}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &427713943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427713938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac66ae4a0e03c4f039cbc637f4d8d444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &428494179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27578,6 +27628,7 @@ GameObject:
   - component: {fileID: 690241263}
   - component: {fileID: 690241262}
   - component: {fileID: 690241261}
+  - component: {fileID: 690241265}
   m_Layer: 0
   m_Name: FallingCutscene
   m_TagString: Untagged
@@ -27654,6 +27705,18 @@ Transform:
   m_Father: {fileID: 1990531296}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &690241265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690241260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da665516bd69748efacc7a9e0d620439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &690332397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34302,7 +34365,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.5291095, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -53510,7 +53573,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.5291095, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -80938,15 +81001,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3956756228843994206, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -148.6304
+      value: -156.36
       objectReference: {fileID: 0}
     - target: {fileID: 3956756228843994206, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.2225223
+      value: -5.1945224
       objectReference: {fileID: 0}
     - target: {fileID: 3956756228843994206, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.559999
+      value: -3.9099998
       objectReference: {fileID: 0}
     - target: {fileID: 3956756228843994206, guid: 025810f69d785f74e8c4b7a1146a3ad6, type: 3}
       propertyPath: m_LocalRotation.w
