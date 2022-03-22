@@ -7,19 +7,18 @@ public class AnyKeyMenuManager : MonoBehaviour {
     [SerializeField]
     private GameObject _mainMenuUI;
 
+    // Uses controller for UI if a controller is plugged in 
+    public static bool _isControllerUsedForUI = false;
+
     private bool _isControllerButtonPressed = false;
     private bool _isComplete = false;
 
     private void Update() {
-        // TODO: Upgrade Input System >= 1.3
-        for (int i = 0; i < 20; i++) {
-            if (Input.GetKeyDown("joystick 1 button " + i)) {
-               _isControllerButtonPressed = true; 
-               break;
-            }
+        if (Gamepad.current != null) {
+            _isControllerUsedForUI = true;
         }
 
-        if ((Input.anyKey || _isControllerButtonPressed) && !_isComplete) {
+        if (Input.anyKey && !_isComplete) {
             _anyKeyMenuUI.SetActive(false);
             _mainMenuUI.SetActive(true);
 

@@ -55,7 +55,5 @@ public class EarthActionController : Interactable  {
         }
     }
 
-    public override string GetDescription() => "Cast";
-    
     public override string GetKeyToPress() => "F";
 }

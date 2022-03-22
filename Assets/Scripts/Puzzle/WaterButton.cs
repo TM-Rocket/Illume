@@ -12,7 +12,5 @@ public class WaterButton : Interactable {
         }
     } 
 
-    public override string GetDescription() => "Press";
-
     public override string GetKeyToPress() => "E";
 }

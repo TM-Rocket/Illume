@@ -19,8 +19,6 @@ public class Tree : Interactable {
         }
     }
 
-    public override string GetDescription() => "Finish";
-
     public override string GetKeyToPress() => "E";
 
     private IEnumerator Finish() {

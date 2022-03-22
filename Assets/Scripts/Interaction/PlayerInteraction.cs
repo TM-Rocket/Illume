@@ -30,7 +30,6 @@ public class PlayerInteraction : MonoBehaviour {
 
             if (interactable != null) {
                 _canInteract = true;
-                _interactionText.text = interactable.GetDescription();
                 _interactionKeyText.text = interactable.GetKeyToPress();
                 _interactionUI.SetActive(_canInteract);
             }
@@ -47,7 +46,6 @@ public class PlayerInteraction : MonoBehaviour {
     private void Update() {
         if (_canInteract == true && _interactObject.tag == "Interactable") {
             Interactable interactable = _interactObject.GetComponent<Interactable>();
-            _interactionText.text = interactable.GetDescription();
 
             if (interactable.GetKeyToPress().Equals("E")) {
                 if (_interactAction.triggered) {

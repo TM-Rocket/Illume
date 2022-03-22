@@ -42,8 +42,6 @@ public class SoundObject : Interactable  {
         }
     }
 
-    public override string GetDescription() => "Press";
-
     public override string GetKeyToPress() => "E";
 
     private IEnumerator FlashBlockColor() {
