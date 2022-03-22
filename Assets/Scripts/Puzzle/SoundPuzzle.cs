@@ -59,6 +59,11 @@ public class SoundPuzzle : MonoBehaviour {
     private void Update() {
         // Cast a sphere to detect player and playback the answerkey for them
         if (!_haveAnswersPlayed) {
+            // Lock interaction until after playback
+            foreach (SoundObject obj in _soundObjects) {
+                obj.IsEnabled = false;
+            }
+
             Collider[] hitColliders = Physics.OverlapSphere(_playbackArea.position, _playbackRadius);
 
             foreach (Collider hit in hitColliders) {
@@ -66,6 +71,12 @@ public class SoundPuzzle : MonoBehaviour {
                     StartCoroutine("PlaySoundClips");
 
                     _haveAnswersPlayed = true;
+
+                    // Unlock interaction after playback
+                    foreach (SoundObject obj in _soundObjects) {
+                        obj.IsEnabled = true; 
+                    }
+
                     break;
                 }  
             }
