@@ -132,7 +132,8 @@ public class PlayerMovement : MonoBehaviour {
                     AudioManager.Instance.Stop("walkingRock");
                 }
             }
-            else if (ground == "ZLPC_Cave_2 (Instance) (UnityEngine.Material)")
+            else if (ground == "ZLPC_Cave_2 (Instance) (UnityEngine.Material)" ||
+                ground == "ZLPC_Prop (Instance) (UnityEngine.Material)")
             {
                 _soundState = 3;
                 if (_soundState != tempstate)
