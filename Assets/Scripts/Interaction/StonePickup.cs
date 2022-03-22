@@ -6,11 +6,13 @@ public class StonePickup : Interactable {
     private List<Vector3> _pickupPositions;
     [SerializeField]
     private List<Vector3> _pickupRotations;
+    [SerializeField]
+    private GameObject _torsoReference;
 
     private void Pickup() {
         gameObject.tag = "Untagged";
 
-        transform.parent = GameObject.Find("Torso").transform;
+        transform.parent = _torsoReference.transform;
         transform.localPosition = _pickupPositions[0];
         transform.localEulerAngles = _pickupRotations[0];
 
