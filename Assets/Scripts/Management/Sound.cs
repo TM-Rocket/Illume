@@ -14,6 +14,8 @@ public class Sound {
     [Range(0.0f, 3.0f)]
     public float Speed=1;
 
+    public bool Fade;
+
     public bool Loop;
 
     [HideInInspector]

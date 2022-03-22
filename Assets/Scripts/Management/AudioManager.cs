@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour {
     public Sound[] Sounds;
@@ -41,6 +43,24 @@ public class AudioManager : MonoBehaviour {
 
     public void Stop(string name) {
         Sound s = Array.Find(Sounds, s => s.Name == name);
+
+        if (s.Fade) {
+            StartCoroutine(FadeOutCore(100.0f, s));
+        } 
+        else {
+            s.Source.Stop();
+        }
+    }
+
+    private IEnumerator FadeOutCore(float fadeTime, Sound s)
+    {
+        float startVolume = s.Source.volume;
+        while (s.Source.volume > 0)
+        {
+            s.Source.volume -= startVolume * Time.deltaTime / fadeTime;
+            yield return null;
+        }
         s.Source.Stop();
+        s.Source.volume = 0;
     }
 }
