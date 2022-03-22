@@ -14,11 +14,10 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 _playerVelocity;
     private Vector3 _movementOffset;
     private bool _groundedPlayer;
-    private bool _isRunning;
     private Animator _animator;
     private int _isRunningHash;
     private int _isJumpingHash;
-    private AudioManager _soundManager;
+    private int _soundState;
 
     public bool IsFrozen = false;
 
@@ -26,8 +25,6 @@ public class PlayerMovement : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
-
-        // _soundManager = GameObject.Find("soundManager").GetComponent<AudioManager>();
 
         _movementAction = _playerInput.actions["Movement"];
         _jumpAction = _playerInput.actions["Jump"];
@@ -38,7 +35,8 @@ public class PlayerMovement : MonoBehaviour {
     } 
 
     private void Update() {
-        if (!IsFrozen) {
+        if (!IsFrozen && _controller.enabled)
+            {
             // Checks if player is grounded, if so changes Jumping animation value.
             if (_groundedPlayer && _playerVelocity.y < 0) {
                 _animator.SetBool(_isJumpingHash, false);
@@ -56,13 +54,10 @@ public class PlayerMovement : MonoBehaviour {
             _controller.Move(_move * Time.deltaTime * 5); // Move player using _move vector from player input
             if (_move.x == 0 || !_groundedPlayer) {
                 _animator.SetBool(_isRunningHash, false);
-                // _soundManager.Stop("walkingGrass");
-                // _isRunning = false;
+                StopFootStep();
+                _soundState = 0;
             } else {
-                if (!_isRunning && _groundedPlayer) {
-                    // _soundManager.Play("walkingGrass");
-                    // _isRunning = true;
-                }
+                PlayFootStep();
                 _animator.SetBool(_isRunningHash, true);
                 transform.rotation = Quaternion.LookRotation(_move); // Makes sure Player is facing the correct direction
             }
@@ -99,6 +94,78 @@ public class PlayerMovement : MonoBehaviour {
 
         return false;
 
+    }
+
+    private void PlayFootStep() // Sound
+    {
+        RaycastHit hit;
+        Ray footstepRay = new Ray(transform.position, Vector3.down);
+
+        if (Physics.Raycast(footstepRay, out hit)){
+
+            GameObject myObj = hit.collider.gameObject;
+            Renderer rend = myObj.GetComponent<Renderer>();
+            Material standingOnMaterial = rend.material;
+            string ground = standingOnMaterial.ToString();
+
+            int tempstate = _soundState;
+
+            if (hit.collider.tag == "Wood")
+            {
+                _soundState = 1;
+                if (_soundState != tempstate)
+                {
+                    AudioManager.Instance.Play("walkingWood");
+                    AudioManager.Instance.Stop("walkingGrass");
+                    AudioManager.Instance.Stop("walkingRock");
+                    AudioManager.Instance.Stop("walkingCave");
+                }
+            }
+            else if (ground == "ZLPC_Cave (Instance) (UnityEngine.Material)")
+            {
+                _soundState = 2;
+                if (_soundState != tempstate)
+                {
+                    AudioManager.Instance.Play("walkingCave");
+                    AudioManager.Instance.Stop("walkingWood");
+                    AudioManager.Instance.Stop("walkingGrass");
+                    AudioManager.Instance.Stop("walkingRock");
+                }
+            }
+            else if (ground == "ZLPC_Cave_2 (Instance) (UnityEngine.Material)")
+            {
+                _soundState = 3;
+                if (_soundState != tempstate)
+                {
+                    AudioManager.Instance.Play("walkingRock");
+                    AudioManager.Instance.Stop("walkingWood");
+                    AudioManager.Instance.Stop("walkingGrass");
+                    AudioManager.Instance.Stop("walkingCave");
+                }
+            }
+            else
+            {
+                _soundState = 4;
+                if (_soundState != tempstate)
+                {
+                    AudioManager.Instance.Play("walkingGrass");
+                    AudioManager.Instance.Stop("walkingWood");
+                    AudioManager.Instance.Stop("walkingRock");
+                    AudioManager.Instance.Stop("walkingCave");
+                }
+            }
+        }
+
+        return;
+    }
+    private void StopFootStep() // Sound
+    {
+        AudioManager.Instance.Stop("walkingGrass");
+        AudioManager.Instance.Stop("walkingWood");
+        AudioManager.Instance.Stop("walkingRock");
+        AudioManager.Instance.Stop("walkingCave");
+
+        return;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {
