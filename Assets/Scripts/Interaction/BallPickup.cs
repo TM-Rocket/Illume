@@ -6,7 +6,6 @@ public class BallPickup : Interactable {
     [SerializeField]
     private Vector3 _pickupRotation;
 
-    private string description = "Pickup";
     private bool dropped = true;
     
     private void Pickup() {
@@ -14,7 +13,6 @@ public class BallPickup : Interactable {
         transform.localPosition = _pickupPosition;
         transform.localEulerAngles = _pickupRotation;
 
-        description = "Drop";
         dropped = false;
     }
 
@@ -31,7 +29,6 @@ public class BallPickup : Interactable {
             transform.localEulerAngles = new Vector3(0,0,0);
 
             dropped = true;
-            description = "Pickup";
         }
     }
 
@@ -43,8 +40,6 @@ public class BallPickup : Interactable {
             Drop();
         }
     }
-
-    public override string GetDescription() => description;
 
     public override string GetKeyToPress() => "E";
 }

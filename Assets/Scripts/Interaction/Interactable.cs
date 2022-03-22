@@ -11,7 +11,6 @@ public abstract class Interactable : MonoBehaviour {
     }
 
     public abstract void Interact();
-    public virtual string GetDescription() => "Interact";
     public virtual string GetKeyToPress() => "E";
 }
 

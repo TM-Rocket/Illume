@@ -19,7 +19,5 @@ public class StonePickup : Interactable {
 
     public override void Interact() => Pickup();
 
-    public override string GetDescription() => "Grab";
-
     public override string GetKeyToPress() => "E";
 }
