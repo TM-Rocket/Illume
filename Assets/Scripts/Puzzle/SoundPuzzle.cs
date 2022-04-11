@@ -20,7 +20,13 @@ public class SoundPuzzle : MonoBehaviour {
     [Header("Cinematics")]
     [SerializeField]
     [Tooltip("Controls Raven NPC while puzzle is being completed")]
-    private GameObject _raven; 
+    private GameObject _raven;
+    [SerializeField]
+    [Tooltip("Plays the starter cinematics attached to the puzzle")]
+    private PlayableDirector _ravenStartCinematic;
+    [SerializeField]
+    [Tooltip("Plays the loop cinematics attached to the puzzle")]
+    private PlayableDirector _ravenLoopCinematic;
     [SerializeField]
     [Tooltip("Plays the cinematics attached to the puzzle")]
     private PlayableDirector _ravenEndCinematic;
@@ -68,6 +74,10 @@ public class SoundPuzzle : MonoBehaviour {
 
             foreach (Collider hit in hitColliders) {
                 if (hit.CompareTag("Player")) {
+
+                    _ravenStartCinematic.Play();
+                    _ravenLoopCinematic.Play();
+
                     StartCoroutine("PlaySoundClips");
 
                     _haveAnswersPlayed = true;
@@ -87,6 +97,7 @@ public class SoundPuzzle : MonoBehaviour {
             if (!_hasEndCinematicPlayed) {
                 _ravenAnimator.SetBool("IsFlying", false);
                 _ravenEndCinematic.Play();
+                _ravenLoopCinematic.Stop();
                 _hasEndCinematicPlayed = true;
             }
         } else if (IsIncorrect()) {
