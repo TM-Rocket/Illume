@@ -10,13 +10,13 @@ public class IntroCutsceneManager : MonoBehaviour
         _part1 = GetComponent<PlayableDirector>();
         _part2 = GameObject.Find("IntroCutscenePart2").GetComponent<PlayableDirector>();
         _playAdventureBGM = false;
-
+        FindObjectOfType<AudioManager>().Play("introBGM");
     }
 
     void Update() {
         if(_part1.state == PlayState.Playing) {
              if(_part1Played == false){
-                 FindObjectOfType<AudioManager>().Play("introBGM");
+                 //FindObjectOfType<AudioManager>().Play("introBGM");
              }
             _part1Played = true;
 
@@ -29,7 +29,9 @@ public class IntroCutsceneManager : MonoBehaviour
         if(_part1Played == true && _part2Played == true)
         {   
             if(_playAdventureBGM == false){
-            FindObjectOfType<AudioManager>().Play("adventureBGM"); 
+                FindObjectOfType<AudioManager>().Stop("introBGM");
+                FindObjectOfType<AudioManager>().Play("forestBGM");
+                FindObjectOfType<AudioManager>().Play("adventureBGM"); 
             }
             _playAdventureBGM = true;
             
