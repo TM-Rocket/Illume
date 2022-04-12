@@ -11710,6 +11710,7 @@ MonoBehaviour:
   postExposure: 1.1
   temperature: 5
   duration: 5
+  isTriggered: 0
 --- !u!23 &284177857
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24542,7 +24543,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 718168935}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &577410633
 MonoBehaviour:
@@ -24562,6 +24563,7 @@ MonoBehaviour:
   postExposure: 1.1
   temperature: 25
   duration: 5
+  isTriggered: 0
 --- !u!1001 &578900424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26440,6 +26442,70 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d7c4f95338154134c9b3b272525fa988, type: 3}
   m_PrefabInstance: {fileID: 1555935496}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &623582121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 623582122}
+  - component: {fileID: 623582124}
+  - component: {fileID: 623582123}
+  m_Layer: 0
+  m_Name: Saturation Drop Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &623582122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623582121}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.8, y: 24.16, z: -44.23708}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 718168935}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &623582123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623582121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb53d012b28b784385bab7a4a1a73a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 136674532}
+  saturation: -30
+  contrast: -20
+  postExposure: 1.1
+  temperature: 20
+  duration: 120
+  isTriggered: 0
+--- !u!65 &623582124
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623582121}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.06337, y: 5, z: 6}
+  m_Center: {x: -0.6285019, y: 2, z: -0.116261005}
 --- !u!1001 &625514107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30708,6 +30774,7 @@ Transform:
   m_Children:
   - {fileID: 284177859}
   - {fileID: 2070921852}
+  - {fileID: 623582122}
   - {fileID: 577410632}
   - {fileID: 1976885339}
   - {fileID: 2140855761}
@@ -84569,7 +84636,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 718168935}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1976885340
 MonoBehaviour:
@@ -84589,6 +84656,7 @@ MonoBehaviour:
   postExposure: -1
   temperature: 0
   duration: 5
+  isTriggered: 0
 --- !u!1001 &1977419239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89049,6 +89117,7 @@ GameObject:
   - component: {fileID: 2070921855}
   - component: {fileID: 2070921854}
   - component: {fileID: 2070921853}
+  - component: {fileID: 2070921857}
   m_Layer: 0
   m_Name: Cave
   m_TagString: Untagged
@@ -89088,6 +89157,7 @@ MonoBehaviour:
   postExposure: 0.2
   temperature: 10
   duration: 4
+  isTriggered: 0
 --- !u!65 &2070921854
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89151,6 +89221,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070921851}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2070921857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070921851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1baa650892e76bb46b7bcf328f9030f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2071319454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92049,7 +92131,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 718168935}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2140855762
 MonoBehaviour:
@@ -92069,6 +92151,7 @@ MonoBehaviour:
   postExposure: 1.1
   temperature: 25
   duration: 3
+  isTriggered: 0
 --- !u!4 &2142061682 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3ecb7a2b3cd1acf43bac804aaa389bba, type: 3}
