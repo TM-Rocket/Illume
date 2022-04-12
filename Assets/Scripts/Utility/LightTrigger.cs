@@ -15,11 +15,13 @@ public class LightTrigger : MonoBehaviour
     public float temperature = 25.0f;
 
     public float duration = 0.0f;
+    public bool isTriggered;
 
     private float progress;
 
     void Start()
     {
+        isTriggered = false;
         volume.profile.TryGetSettings(out _colorGradingLayer);
 
         if (gameObject.name == "NightTrigger" || gameObject.name == "DayTrigger")
@@ -53,8 +55,9 @@ public class LightTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && isTriggered == false)
         {
+            isTriggered = true;
             StartCoroutine(ChangeLighting());
         }
     }
