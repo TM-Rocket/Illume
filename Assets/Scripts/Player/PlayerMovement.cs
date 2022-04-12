@@ -52,11 +52,12 @@ public class PlayerMovement : MonoBehaviour {
             Vector2 input = _movementAction.ReadValue<Vector2>();
             _move = new Vector3(input.x, 0, 0);
             _controller.Move(_move * Time.deltaTime * 5); // Move player using _move vector from player input
+
             if (_move.x == 0 || !_groundedPlayer) {
                 _animator.SetBool(_isRunningHash, false);
                 StopFootStep();
                 _soundState = 0;
-            } else {
+            } else if (_move.x != 0) {
                 PlayFootStep();
                 _animator.SetBool(_isRunningHash, true);
                 transform.rotation = Quaternion.LookRotation(_move); // Makes sure Player is facing the correct direction
@@ -64,14 +65,19 @@ public class PlayerMovement : MonoBehaviour {
 
             // Player jump input and animation
             if (_jumpAction.triggered && _groundedPlayer) {
+                AudioManager.Instance.Play("jump");
                 _animator.SetBool(_isJumpingHash, true);
-                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -7.0f * -9.81f); // Jump + gravity
+                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -8.0f * -9.81f); // Jump + gravity
             }
 
-            _playerVelocity.y += -40f * Time.deltaTime; // Brings player back down to ground
+            _playerVelocity.y += -35f * Time.deltaTime; // Brings player back down to ground
             _controller.Move(_playerVelocity * Time.deltaTime); // Move player after calculating Y vector
 
             _groundedPlayer = GroundedCheck(); // Character controller grounded check
+        } else
+        {
+            StopFootStep();
+            _soundState = 0;
         }
     }
 
@@ -84,8 +90,8 @@ public class PlayerMovement : MonoBehaviour {
 
         RaycastHit hit; //creates raycast "hit"
 
-        //if the bottom of the player is within 0.2m of the ground and the player is not currently moving up
-        if (Physics.Raycast(_controller.transform.position, new Vector3(0, -1, 0), out hit, 0.2f) && _playerVelocity.y <= 0)
+        //if the bottom of the player is within 0.16m of the ground and the player is not currently moving up
+        if (Physics.Raycast(_controller.transform.position, new Vector3(0, -1, 0), out hit, 0.16f) && _playerVelocity.y <= 0)
         {
             //move the player down the distance of the raycast hit
             _controller.Move(new Vector3(0, -hit.distance, 0));

@@ -12,6 +12,8 @@ public class StonePickup : Interactable {
     private void Pickup() {
         gameObject.tag = "Untagged";
 
+        AudioManager.Instance.Play("pickup");
+
         transform.parent = _torsoReference.transform;
         transform.localPosition = _pickupPositions[0];
         transform.localEulerAngles = _pickupRotations[0];

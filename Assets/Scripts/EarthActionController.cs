@@ -25,7 +25,7 @@ public class EarthActionController : Interactable  {
 
     private void UpdateMultipleEarthActions() {
         _objectSet[_activeObjectIndex].SetActive(false);
-
+        AudioManager.Instance.Play("earthAbility");
         if (_activeObjectIndex < _objectSet.Count - 1) {
             _activeObjectIndex++;
             _objectSet[_activeObjectIndex].SetActive(true);
@@ -36,6 +36,7 @@ public class EarthActionController : Interactable  {
     }
 
     private void UpdateSingleEarthAction() {
+        AudioManager.Instance.Play("earthAbility");
         if (_isOnState) {
             // Play object 'down' animation when on
             _objectAnimatorSet[0].SetBool("isOn", false); 
