@@ -9,6 +9,8 @@ public class StonePickup : Interactable {
     [SerializeField]
     private GameObject _torsoReference;
 
+    public static bool IsStonePickedUp = false;
+
     private void Pickup() {
         gameObject.tag = "Untagged";
 
@@ -19,6 +21,7 @@ public class StonePickup : Interactable {
         transform.localEulerAngles = _pickupRotations[0];
 
         IsEnabled = false;
+        IsStonePickedUp = true;
     }
 
     public override void Interact() => Pickup();

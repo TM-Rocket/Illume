@@ -19,6 +19,8 @@ public class SoundPuzzle : MonoBehaviour {
     private List<AudioClip> _puzzleSounds;
     [Header("Cinematics")]
     [SerializeField]
+    private PlayableDirector _ravenExposition;
+    [SerializeField]
     [Tooltip("Controls Raven NPC while puzzle is being completed")]
     private GameObject _raven;
     [SerializeField]
@@ -35,6 +37,8 @@ public class SoundPuzzle : MonoBehaviour {
      * Puzzle Logic
      */
     private bool _haveAnswersPlayed; 
+    private bool _isCoroutineOver = false;
+    private bool _hasRavenExpositionPlayed = false;
     private float _playbackDelay = 0f;
 
     /**
@@ -82,13 +86,21 @@ public class SoundPuzzle : MonoBehaviour {
 
                     _haveAnswersPlayed = true;
 
-                    // Unlock interaction after playback
-                    foreach (SoundObject obj in _soundObjects) {
-                        obj.IsEnabled = true; 
-                    }
-
                     break;
                 }  
+            }
+        } 
+        
+        // Once first playback is over, enable objects and play exposition
+        if (_isCoroutineOver) {
+            if (!_hasRavenExpositionPlayed) {
+                _ravenExposition.Play();
+                _hasRavenExpositionPlayed = true;
+            }
+            
+            // Unlock interaction after playback
+            foreach (SoundObject obj in _soundObjects) {
+                obj.IsEnabled = true; 
             }
         }
 
@@ -117,6 +129,8 @@ public class SoundPuzzle : MonoBehaviour {
 
             yield return new WaitForSeconds(_playbackDelay);
         }
+
+        _isCoroutineOver = true;
     }
 
     public static bool IsSolved() => AnswerKey.SequenceEqual(PlayerAnswers);
