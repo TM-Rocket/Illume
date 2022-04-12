@@ -35,7 +35,7 @@ public class PlayerInteraction : MonoBehaviour {
 
             Interactable interactable = other.GetComponent<Interactable>();
 
-            if (interactable != null) {
+            if (interactable != null && interactable.IsEnabled) {
                 _canInteract = true;
 
                 if (interactable.GetKeyToPress().Equals("E") && AnyKeyMenuManager._isControllerUsedForUI) {

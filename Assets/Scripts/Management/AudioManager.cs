@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour {
         Sound s = Array.Find(Sounds, s => s.Name == name);
 
         if (s.Fade) {
-            StartCoroutine(FadeOutCore(100.0f, s));
+            StartCoroutine(FadeOutCore(5.0f, s));
         } 
         else {
             s.Source.Stop();
