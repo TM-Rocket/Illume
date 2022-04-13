@@ -9,6 +9,10 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/[Aa]ssets/Samples/
+/[Aa]ssets/ProBuilder Data*
+/[Pp]rojectSettings/Packages/com.unity.probuilder
+/[Aa]ssets/Materials/Ocean50x50W750H750.asset
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -57,4 +61,12 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# Individual User Settings
+UserSettings/
+
+# Misc.
+.DS_Store
+.vscode
+.vs
 
