@@ -107,58 +107,51 @@ public class PlayerMovement : MonoBehaviour {
         RaycastHit hit;
         Ray footstepRay = new Ray(transform.position, Vector3.down);
 
-        if (Physics.Raycast(footstepRay, out hit)){
+        if (Physics.Raycast(footstepRay, out hit)) {
 
             GameObject myObj = hit.collider.gameObject;
-            Renderer rend = myObj.GetComponent<Renderer>();
-            Material standingOnMaterial = rend.material;
-            string ground = standingOnMaterial.ToString();
 
-            int tempstate = _soundState;
+            // Check if object has a Renderer component on it
+            if (myObj.GetComponent<Renderer>()) { 
+                Renderer rend = myObj.GetComponent<Renderer>();
+                Material standingOnMaterial = rend.material;
+                string ground = standingOnMaterial.ToString();
 
-            if (hit.collider.tag == "Wood")
-            {
-                _soundState = 1;
-                if (_soundState != tempstate)
-                {
-                    AudioManager.Instance.Play("walkingWood");
-                    AudioManager.Instance.Stop("walkingGrass");
-                    AudioManager.Instance.Stop("walkingRock");
-                    AudioManager.Instance.Stop("walkingCave");
-                }
-            }
-            else if (ground == "ZLPC_Cave (Instance) (UnityEngine.Material)")
-            {
-                _soundState = 2;
-                if (_soundState != tempstate)
-                {
-                    AudioManager.Instance.Play("walkingCave");
-                    AudioManager.Instance.Stop("walkingWood");
-                    AudioManager.Instance.Stop("walkingGrass");
-                    AudioManager.Instance.Stop("walkingRock");
-                }
-            }
-            else if (ground == "ZLPC_Cave_2 (Instance) (UnityEngine.Material)" ||
-                ground == "ZLPC_Prop (Instance) (UnityEngine.Material)")
-            {
-                _soundState = 3;
-                if (_soundState != tempstate)
-                {
-                    AudioManager.Instance.Play("walkingRock");
-                    AudioManager.Instance.Stop("walkingWood");
-                    AudioManager.Instance.Stop("walkingGrass");
-                    AudioManager.Instance.Stop("walkingCave");
-                }
-            }
-            else
-            {
-                _soundState = 4;
-                if (_soundState != tempstate)
-                {
-                    AudioManager.Instance.Play("walkingGrass");
-                    AudioManager.Instance.Stop("walkingWood");
-                    AudioManager.Instance.Stop("walkingRock");
-                    AudioManager.Instance.Stop("walkingCave");
+                int tempstate = _soundState;
+
+                if (hit.collider.tag == "Wood") {
+                    _soundState = 1;
+                    if (_soundState != tempstate) {
+                        AudioManager.Instance.Play("walkingWood");
+                        AudioManager.Instance.Stop("walkingGrass");
+                        AudioManager.Instance.Stop("walkingRock");
+                        AudioManager.Instance.Stop("walkingCave");
+                    }
+                } else if (ground == "ZLPC_Cave (Instance) (UnityEngine.Material)") {
+                    _soundState = 2;
+                    if (_soundState != tempstate) {
+                        AudioManager.Instance.Play("walkingCave");
+                        AudioManager.Instance.Stop("walkingWood");
+                        AudioManager.Instance.Stop("walkingGrass");
+                        AudioManager.Instance.Stop("walkingRock");
+                    }
+                } else if (ground == "ZLPC_Cave_2 (Instance) (UnityEngine.Material)" ||
+                      ground == "ZLPC_Prop (Instance) (UnityEngine.Material)") {
+                    _soundState = 3;
+                    if (_soundState != tempstate) {
+                        AudioManager.Instance.Play("walkingRock");
+                        AudioManager.Instance.Stop("walkingWood");
+                        AudioManager.Instance.Stop("walkingGrass");
+                        AudioManager.Instance.Stop("walkingCave");
+                    }
+                } else {
+                    _soundState = 4;
+                    if (_soundState != tempstate) {
+                        AudioManager.Instance.Play("walkingGrass");
+                        AudioManager.Instance.Stop("walkingWood");
+                        AudioManager.Instance.Stop("walkingRock");
+                        AudioManager.Instance.Stop("walkingCave");
+                    }
                 }
             }
         }
